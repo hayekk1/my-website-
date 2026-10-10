@@ -1,1 +1,1 @@
-Something broke. Who do you call? LocalFix: post the job, compare offers from local pros, book one, leave a review. Built with Spring Boot + MySQL by Charbel Riachy, Georgio Hayek & Steven Bechelany.
+Your sink is leaking. Aunt Rita's cousin's guy isn't answering. LocalFix: post the job, get offers from local pros, book one, rate it. Built by Charbel Riachy, Georgio Hayek & Steven Bechelany.
