@@ -59,9 +59,9 @@ const lerp=(a,b,x)=>a+(b-a)*x;
 const pad=n=>String(n).padStart(3,'0');
 let PTS=window.ORBIT_PTS||[];
 const ITEMS=[['espresso','ESPRESSO','A double shot, pulled hot, poured over the top.',[40,-150]],
-             ['ice','ICE','Cracked, clinking, non-negotiable.',[40,-70]],
+             ['ice','ICE','Cracked, clinking, non-negotiable.',[50,30]],
              ['swirl','THE SWIRL','Espresso blooming slowly into the milk.',[-380,-40]],
-             ['condensation','CONDENSATION','Beads of water. Proof it’s properly cold.',[50,60]],
+             ['condensation','CONDENSATION','Beads of water. Proof it’s properly cold.',[-30,80]],
              ['milk','COLD MILK','Creamy, poured first. The base of everything.',[-360,90]]];
 const IT=[11.0,12.2,13.4,14.6,15.8];
 $('tags').innerHTML=ITEMS.map((it,i)=>`<div class="ov tag" id="tg${i}">${it[1]}</div>`).join('');
