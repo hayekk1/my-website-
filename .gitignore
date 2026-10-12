@@ -12,3 +12,10 @@ brag-output-*/work/st2_*.png
 brag-output-*/work/sheet.png
 brag-output-*/work/check.png
 brag-output-*/work/render.log
+brag-output-*/real/out/
+brag-output-*/real/out_q/
+brag-output-*/real/comp/
+brag-output-*/real/*.png
+brag-output-*/real/*.wav
+brag-output-*/real/render.log
+brag-output-*/real/__pycache__/
