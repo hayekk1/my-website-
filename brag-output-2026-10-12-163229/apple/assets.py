@@ -34,7 +34,7 @@ elif what == 'laptop':
     setup(1080, 1920, 64, transparent=False, cream=False)
     for ob in [o for o in bpy.data.objects if o.type == 'LIGHT']: bpy.data.objects.remove(ob)
     bpy.context.scene.world.node_tree.nodes['Background'].inputs['Color'].default_value = (0.004, 0.004, 0.005, 1)
-    alu = S.m_simple('alu', (0.035, 0.037, 0.04, 1), 0.4, 1.0); keym = S.m_simple('key', (0.015, 0.015, 0.016, 1), 0.6)
+    alu = S.m_simple('alu', (0.035, 0.037, 0.04, 1), 0.4, 1.0); keym = S.m_simple('key', (0.012, 0.012, 0.013, 1), 0.45)
     desk = S.m_simple('desk', (0.05, 0.045, 0.04, 1), 0.7)
     bpy.ops.mesh.primitive_plane_add(size=4, location=(0, 0, -0.001)); bpy.context.active_object.data.materials.append(desk)
     bpy.ops.mesh.primitive_cube_add(location=(0, 0, 0.0075)); base = bpy.context.active_object; base.scale = (0.155, 0.108, 0.0075); base.data.materials.append(alu)
@@ -52,7 +52,7 @@ elif what == 'laptop':
     scr.scale = (0.145, 0.0906, 1); scr.data.materials.append(S.m_simple('glassblack', (0.0, 0.0, 0.0, 1), 0.08)); scr.parent = lid
     # screen glow (content gets composited later) + dim room light
     bpy.ops.object.light_add(type='AREA', location=(0, 0.0, 0.11)); gl = bpy.context.active_object; gl.data.shape = 'RECTANGLE'; gl.data.size = 0.29; gl.data.size_y = 0.18
-    gl.data.energy = 9; gl.data.color = (1.0, 0.92, 0.82); gl.rotation_euler = (math.radians(90 - 15 + 180), 0, 0); gl.parent = lid; gl.location = (0, -0.01, 0.108)
+    gl.data.energy = 2.2; gl.data.color = (1.0, 0.92, 0.82); gl.rotation_euler = (math.radians(90 - 15 + 180), 0, 0); gl.parent = lid; gl.location = (0, -0.01, 0.108)
     bpy.ops.object.light_add(type='AREA', location=(0, 0.6, 0.9)); top = bpy.context.active_object; top.data.size = 1.5; top.data.energy = 8; top.rotation_euler = (math.radians(30), 0, math.radians(180))
     bpy.ops.mesh.primitive_plane_add(size=3, location=(0, 0.9, 0.6), rotation=(math.radians(80), 0, 0)); wall = bpy.context.active_object; wall.data.materials.append(S.m_simple('wall', (0.10, 0.10, 0.11, 1), 0.8))
     cam = S.camera((0.0, -0.20, 0.215), (0, 0.07, 0.10), lens=22, fstop=5)

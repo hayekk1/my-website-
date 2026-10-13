@@ -15,19 +15,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family
 #t1 .a{font-size:30px;font-weight:500;letter-spacing:-.2px}
 #t1 .b{font-size:84px;font-weight:600;letter-spacing:-2px;line-height:1.05}
 #cream{inset:0;background:#EEE5D8}
-.cup{width:300px;height:420px;background:url(assets/cup.png) center/contain no-repeat}
-#cupS{left:570px;top:330px;width:300px;height:420px}
+.cup{background:url(assets/cup.png) center/contain no-repeat}
+#cupS{left:500px;top:150px;width:440px;height:616px}
 .word{display:inline-block;margin-right:16px}
-#t2{left:260px;top:400px;font-size:60px;font-weight:600;color:#3A2A1E;letter-spacing:-1.5px}
-.ice{width:150px;height:150px;background-size:contain;background-repeat:no-repeat;background-position:center}
-#t3{left:700px;top:640px;font-size:36px;font-weight:600;color:#3A2A1E;letter-spacing:-.5px}
+#t2{left:160px;top:410px;font-size:66px;font-weight:600;color:#3A2A1E;letter-spacing:-1.5px}
+.ice{width:230px;height:230px;background-size:contain;background-repeat:no-repeat;background-position:center}
+#t3{left:640px;top:600px;font-size:44px;font-weight:600;color:#3A2A1E;letter-spacing:-.5px}
 #macro{inset:0;background:url(assets/macro.png) center/cover}
 #bar{left:1150px;top:250px;width:44px;height:400px;border-radius:22px;background:rgba(255,255,255,.35);overflow:hidden;backdrop-filter:blur(6px)}
 #barFill{position:absolute;left:0;right:0;bottom:0;border-radius:22px;background:linear-gradient(#4A2412,#A7683B 55%,#F2E6D6)}
 #t4{left:1000px;top:690px;font-size:40px;font-weight:600;color:#fff;letter-spacing:-.5px;text-shadow:0 2px 20px rgba(0,0,0,.25)}
 #dark{inset:0;background:#000}
 #logo{left:670px;top:300px;width:100px;height:130px}
-#fine{left:420px;right:420px;top:520px;text-align:center;color:#8d8781;font-size:17px;line-height:1.5;font-weight:500}
+#fine{left:380px;right:380px;top:520px;text-align:center;color:#8d8781;font-size:24px;line-height:1.5;font-weight:500}
 #cupShadow{width:260px;height:40px;border-radius:50%;background:radial-gradient(ellipse,rgba(60,40,25,.35),rgba(60,40,25,0) 70%)}
 #glare{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.07) 45%,rgba(255,255,255,0) 60%)}
 #moire{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 2px,transparent 2px 5px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 6px);mix-blend-mode:multiply}
@@ -40,6 +40,7 @@ canvas{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay}
 </style></head><body>
 <div id="phone">
  <img id="plate" src="assets/laptop.png">
+ <div id="kdark" style="position:absolute;left:-60px;right:-60px;top:1100px;height:900px;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.72) 40%,rgba(0,0,0,.8))"></div>
  <div id="wallglow"></div>
  <div id="kglow"></div>
  <div id="screen"><div id="content">
@@ -118,12 +119,12 @@ function render(t){
     $('cupS').style.transformOrigin='50% 100%';place($('cupS'),0,cy,1,0,1);$('cupS').style.transform+=` scale(${1+sq},${1-sq})`;}
   if(!(t>=10.45&&t<11.6)){$('cupS').style.transformOrigin='50% 50%';place($('cupS'),cx,cy,cs,cr,co);}
   show($('cupS'),co>0&&t<11.6);
-  show($('cupShadow'),t>=4.2&&t<11.6&&!MAC);place($('cupShadow'),570+20+cx,330+420*0.5+210*cs-10+(t>=10.45?0:0),cs,0,t>=10.45?P(t,10.6,10.95)*.9:.7*P(t,4.2,4.6));
+  show($('cupShadow'),t>=4.2&&t<11.6&&!MAC);place($('cupShadow'),590+cx,150+308+300*cs,cs*1.4,0,t>=10.45?P(t,10.6,10.95)*.9:.7*P(t,4.2,4.6));
   // words
   show($('t2'),t>=5.5&&t<6.5);[...$('t2').children].forEach((w,i)=>{const a=5.5+i*.12,k=eo(P(t,a,a+.35));w.style.opacity=k*(1-P(t,6.25,6.5));w.style.filter=`blur(${(1-k)*8}px)`;w.style.transform=`translateY(${(1-k)*10}px)`;});
   // ice row
   [0,1,2,3].forEach(i=>{const el=$('i'+i),a=6.7+i*.13;const on=t>=a&&t<9.0;show(el,on);if(!on)return;const k=back(P(t,a,a+.45)),out=eio(P(t,8.55,8.95));
-    el.style.left='0px';el.style.top='0px';place(el,700+i*150+(1-k)*400+out*600,330+Math.sin(t*2+i)*6,lerp(.6,1,k)*(1-out*.3),(1-k)*40+i*3,P(t,a,a+.15)*(1-out));});
+    el.style.left='0px';el.style.top='0px';place(el,560+i*185+(1-k)*400+out*600,280+Math.sin(t*2+i)*6,lerp(.6,1,k)*(1-out*.3),(1-k)*40+i*3,P(t,a,a+.15)*(1-out));});
   show($('t3'),t>=7.35&&t<8.7);if(t>=7.35){const k=eo(P(t,7.35,7.75));$('t3').style.opacity=k*(1-P(t,8.45,8.7));$('t3').style.filter=`blur(${(1-k)*6}px)`;}
   // macro
   show($('macro'),MAC);if(MAC){const k=P(t,9.0,10.45);$('macro').style.transform=`scale(${lerp(1.15,1.0,eo(k))})`;$('macro').style.opacity=P(t,9.0,9.15)*(1-P(t,10.3,10.45));}
