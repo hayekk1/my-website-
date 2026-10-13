@@ -1,0 +1,145 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+#phone{position:absolute;inset:0;transform-origin:50% 45%}
+#plate{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#screen{position:absolute;left:0;top:0;width:1440px;height:900px;transform-origin:0 0;overflow:hidden;background:#000}
+#content{position:absolute;inset:0;filter:blur(.7px) saturate(1.05)}
+.l{position:absolute}
+.disp{font-family:"Inter Display",Inter,sans-serif}
+#grad{inset:0}
+#glowA{left:50%;top:50%;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(circle,#F6E3C4 0%,rgba(222,170,110,.75) 35%,rgba(120,70,40,0) 70%);filter:blur(30px)}
+#t1{left:0;right:0;top:560px;text-align:center;color:#2B1A10}
+#t1 .a{font-size:30px;font-weight:500;letter-spacing:-.2px}
+#t1 .b{font-size:84px;font-weight:600;letter-spacing:-2px;line-height:1.05}
+#cream{inset:0;background:#EEE5D8}
+.cup{width:300px;height:420px;background:url(assets/cup.png) center/contain no-repeat}
+#cupS{left:570px;top:330px;width:300px;height:420px}
+.word{display:inline-block;margin-right:16px}
+#t2{left:260px;top:400px;font-size:60px;font-weight:600;color:#3A2A1E;letter-spacing:-1.5px}
+.ice{width:150px;height:150px;background-size:contain;background-repeat:no-repeat;background-position:center}
+#t3{left:700px;top:640px;font-size:36px;font-weight:600;color:#3A2A1E;letter-spacing:-.5px}
+#macro{inset:0;background:url(assets/macro.png) center/cover}
+#bar{left:1150px;top:250px;width:44px;height:400px;border-radius:22px;background:rgba(255,255,255,.35);overflow:hidden;backdrop-filter:blur(6px)}
+#barFill{position:absolute;left:0;right:0;bottom:0;border-radius:22px;background:linear-gradient(#4A2412,#A7683B 55%,#F2E6D6)}
+#t4{left:1000px;top:690px;font-size:40px;font-weight:600;color:#fff;letter-spacing:-.5px;text-shadow:0 2px 20px rgba(0,0,0,.25)}
+#dark{inset:0;background:#000}
+#logo{left:670px;top:300px;width:100px;height:130px}
+#fine{left:420px;right:420px;top:520px;text-align:center;color:#8d8781;font-size:17px;line-height:1.5;font-weight:500}
+#cupShadow{width:260px;height:40px;border-radius:50%;background:radial-gradient(ellipse,rgba(60,40,25,.35),rgba(60,40,25,0) 70%)}
+#glare{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.07) 45%,rgba(255,255,255,0) 60%)}
+#moire{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 2px,transparent 2px 5px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 6px);mix-blend-mode:multiply}
+#kglow{position:absolute;left:-200px;right:-200px;top:1080px;height:900px;background:radial-gradient(ellipse at 50% 0%,var(--g,#ffe) 0%,rgba(0,0,0,0) 60%);mix-blend-mode:screen}
+#wallglow{position:absolute;left:-100px;right:-100px;top:0;height:560px;background:radial-gradient(ellipse at 50% 100%,var(--g,#ffe) 0%,rgba(0,0,0,0) 65%);mix-blend-mode:screen}
+#cap{position:absolute;left:0;right:0;top:1150px;text-align:center;color:#fff;font-size:58px;font-weight:800;letter-spacing:-.5px;text-shadow:0 2px 6px rgba(0,0,0,.7),0 0 30px rgba(0,0,0,.6)}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%)}
+canvas{position:absolute;inset:0;opacity:.09;mix-blend-mode:overlay}
+#fade{position:absolute;inset:0;background:#000}
+</style></head><body>
+<div id="phone">
+ <img id="plate" src="assets/laptop.png">
+ <div id="wallglow"></div>
+ <div id="kglow"></div>
+ <div id="screen"><div id="content">
+   <div class="l" id="grad" style="inset:0"></div>
+   <div class="l" id="glowA"></div>
+   <div class="l" id="t1"><div class="a">All new</div><div class="b disp">Iced Latte</div></div>
+   <div class="l" id="cream"></div>
+   <div class="l" id="cupShadow"></div>
+   <div class="l cup" id="cupS"></div>
+   <div class="l disp" id="t2"><span class="word">Brewed</span><span class="word">from</span><span class="word">the</span><span class="word">ground</span><span class="word">up.</span></div>
+   <div class="l ice" id="i0" style="background-image:url(assets/ice0.png)"></div>
+   <div class="l ice" id="i1" style="background-image:url(assets/ice1.png)"></div>
+   <div class="l ice" id="i2" style="background-image:url(assets/ice2.png)"></div>
+   <div class="l ice" id="i3" style="background-image:url(assets/ice3.png)"></div>
+   <div class="l disp" id="t3">Ice, finally figured out.</div>
+   <div class="l" id="macro"></div>
+   <div class="l" id="bar"><div id="barFill"></div></div>
+   <div class="l disp" id="t4">Swirl control</div>
+   <div class="l" id="dark"></div>
+   <svg class="l" id="logo" viewBox="0 0 100 130"><ellipse cx="50" cy="65" rx="42" ry="58" fill="#EDE6DC"/><path d="M50 9 C30 40 70 90 50 121" stroke="#000" stroke-width="9" fill="none" stroke-linecap="round"/></svg>
+   <div class="l" id="fine">Iced Latte. Cold milk, a double shot of espresso and a lot of ice. Rendered in 3D. No cups were harmed. Worth protecting.</div>
+ </div>
+ <div id="moire"></div><div id="glare"></div></div>
+</div>
+<div id="cap">opus 5.5</div>
+<div id="vig"></div>
+<canvas id="grain" width="540" height="960"></canvas>
+<div id="fade"></div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+// ---- homography: map 1440x900 rect onto screen corners
+function adj(m){return[m[4]*m[8]-m[5]*m[7],m[2]*m[7]-m[1]*m[8],m[1]*m[5]-m[2]*m[4],m[5]*m[6]-m[3]*m[8],m[0]*m[8]-m[2]*m[6],m[2]*m[3]-m[0]*m[5],m[3]*m[7]-m[4]*m[6],m[1]*m[6]-m[0]*m[7],m[0]*m[4]-m[1]*m[3]];}
+function mm(a,b){const c=[];for(let i=0;i<3;i++)for(let j=0;j<3;j++){let s=0;for(let k=0;k<3;k++)s+=a[3*i+k]*b[3*k+j];c[3*i+j]=s;}return c;}
+function mv(m,v){return[m[0]*v[0]+m[1]*v[1]+m[2]*v[2],m[3]*v[0]+m[4]*v[1]+m[5]*v[2],m[6]*v[0]+m[7]*v[1]+m[8]*v[2]];}
+function basis(p){const m=[p[0][0],p[1][0],p[2][0],p[0][1],p[1][1],p[2][1],1,1,1];const v=mv(adj(m),[p[3][0],p[3][1],1]);return mm(m,[v[0],0,0,0,v[1],0,0,0,v[2]]);}
+function homog(dst){const s=basis([[0,0],[1440,0],[1440,900],[0,900]]),d=basis(dst);let t=mm(d,adj(s));t=t.map(x=>x/t[8]);
+  return `matrix3d(${t[0]},${t[3]},0,${t[6]},${t[1]},${t[4]},0,${t[7]},0,0,1,0,${t[2]},${t[5]},0,${t[8]})`;}
+let SCREEN=[[30.1,491.3],[1049.9,491.3],[1013.8,1110.7],[66.2,1110.7]];
+function setScreen(s){SCREEN=s;$('screen').style.transform=homog(s);}
+setScreen(SCREEN);
+
+function show(el,on){el.style.display=on?'':'none';}
+function place(el,x,y,s=1,r=0,o=1){el.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;el.style.opacity=o;}
+function grain(t){const c=$('grain'),g=c.getContext('2d');const im=g.createImageData(540,960);let s=Math.floor(t*30)*9301+49297;
+  for(let i=0;i<im.data.length;i+=4){s=(s*1103515245+12345)&0x7fffffff;const v=(s>>16)&255;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255;}g.putImageData(im,0,0);}
+
+function render(t){
+  // handheld phone motion
+  const hx=Math.sin(t*1.3)*5+Math.sin(t*3.1)*2,hy=Math.cos(t*1.1)*4+Math.sin(t*2.7)*2,hr=Math.sin(t*.9)*.35;
+  $('phone').style.transform=`translate(${hx}px,${hy}px) rotate(${hr}deg) scale(${1.03+Math.sin(t*.4)*.008})`;
+  let glow=0,gcol='#ffe9cc';
+  // --- scene states
+  const S1=t>=1.0&&t<3.55, S2=t>=3.3&&t<11.6, MAC=t>=9.0&&t<10.45, END=t>=11.6;
+  // gradient intro
+  show($('grad'),S1);show($('glowA'),t>=1.0&&t<4.2);
+  if(S1){const k=eo(P(t,1.0,1.6)),out=eio(P(t,2.9,3.4));const r=lerp(10,95,k)*(1-out*.75),br=Math.sin(t*2)*3;
+    $('grad').style.background=`radial-gradient(circle at 50% 62%, #F7E2BE 0%, #E8B77A ${18+br}%, #B06A35 ${34+br}%, #5B3019 ${50+br}%, #24130B ${r+br}%)`;
+    $('grad').style.opacity=k*(1-out);glow=.55*k*(1-out);gcol='#f2b979';}
+  if(t>=1.0&&t<4.2){const k=eo(P(t,1.0,1.5));const o=t<3.0?k*.0:lerp(0,1,P(t,3.0,3.4))*(1-P(t,3.9,4.2));place($('glowA'),0,0,lerp(.5,1,P(t,3.0,3.9)),0,o);if(t>=3)glow=Math.max(glow,.35*o);}
+  show($('t1'),t>=1.6&&t<3.1);if(t>=1.6&&t<3.1){const k=eo(P(t,1.6,2.0));place($('t1'),0,(1-k)*20,1,0,k*(1-P(t,2.85,3.1)));}
+  // cream stage
+  show($('cream'),t>=3.85&&t<11.6);if(t>=3.85)$('cream').style.opacity=P(t,3.85,4.2);
+  // cup choreography (cup box 300x420 at 570,330)
+  let cx=0,cy=0,cs=1,cr=0,co=0;
+  if(t>=3.4&&t<4.2){const k=eo(P(t,3.4,4.2));cy=lerp(260,60,k);cs=lerp(.35,.6,k);co=P(t,3.4,3.7);}
+  else if(t>=4.2&&t<5.4){const k=eio(P(t,4.2,5.4));cy=lerp(60,0,k)+Math.sin(t*2.2)*6;cs=lerp(.6,1.1,k);cr=lerp(-6,0,k);co=1;}
+  else if(t>=5.4&&t<6.4){cy=Math.sin(t*2.2)*6;cs=lerp(1.1,.75,eio(P(t,5.4,6.0)));cx=lerp(0,330,eio(P(t,5.4,6.0)));co=1;}
+  else if(t>=6.4&&t<8.6){const k=eio(P(t,6.4,6.9));cx=lerp(330,-380,k);cy=Math.sin(t*2.2)*6;cs=lerp(.75,.95,k);co=1;}
+  else if(t>=8.6&&t<9.0){const k=eio(P(t,8.6,9.0));cx=lerp(-380,0,k);cs=lerp(.95,2.6,k);co=1-P(t,8.85,9.0);}
+  else if(t>=10.45&&t<11.6){const k=P(t,10.45,10.95);cy=k<1?lerp(-700,0,k*k):0;const sq=t>=10.95?Math.exp(-(t-10.95)*9)*Math.sin((t-10.95)*30)*.06:0;cs=1;co=1;
+    $('cupS').style.transformOrigin='50% 100%';place($('cupS'),0,cy,1,0,1);$('cupS').style.transform+=` scale(${1+sq},${1-sq})`;}
+  if(!(t>=10.45&&t<11.6)){$('cupS').style.transformOrigin='50% 50%';place($('cupS'),cx,cy,cs,cr,co);}
+  show($('cupS'),co>0&&t<11.6);
+  show($('cupShadow'),t>=4.2&&t<11.6&&!MAC);place($('cupShadow'),570+20+cx,330+420*0.5+210*cs-10+(t>=10.45?0:0),cs,0,t>=10.45?P(t,10.6,10.95)*.9:.7*P(t,4.2,4.6));
+  // words
+  show($('t2'),t>=5.5&&t<6.5);[...$('t2').children].forEach((w,i)=>{const a=5.5+i*.12,k=eo(P(t,a,a+.35));w.style.opacity=k*(1-P(t,6.25,6.5));w.style.filter=`blur(${(1-k)*8}px)`;w.style.transform=`translateY(${(1-k)*10}px)`;});
+  // ice row
+  [0,1,2,3].forEach(i=>{const el=$('i'+i),a=6.7+i*.13;const on=t>=a&&t<9.0;show(el,on);if(!on)return;const k=back(P(t,a,a+.45)),out=eio(P(t,8.55,8.95));
+    el.style.left='0px';el.style.top='0px';place(el,700+i*150+(1-k)*400+out*600,330+Math.sin(t*2+i)*6,lerp(.6,1,k)*(1-out*.3),(1-k)*40+i*3,P(t,a,a+.15)*(1-out));});
+  show($('t3'),t>=7.35&&t<8.7);if(t>=7.35){const k=eo(P(t,7.35,7.75));$('t3').style.opacity=k*(1-P(t,8.45,8.7));$('t3').style.filter=`blur(${(1-k)*6}px)`;}
+  // macro
+  show($('macro'),MAC);if(MAC){const k=P(t,9.0,10.45);$('macro').style.transform=`scale(${lerp(1.15,1.0,eo(k))})`;$('macro').style.opacity=P(t,9.0,9.15)*(1-P(t,10.3,10.45));}
+  show($('bar'),t>=9.3&&t<10.4);$('bar').style.opacity=P(t,9.3,9.45)*(1-P(t,10.25,10.4));$('barFill').style.height=(eio(P(t,9.4,10.1))*100)+'%';
+  show($('t4'),t>=9.45&&t<10.4);$('t4').style.opacity=eo(P(t,9.45,9.8))*(1-P(t,10.25,10.4));
+  // end
+  show($('dark'),t<1.0||END);$('dark').style.opacity=t<1.0?1:P(t,11.6,11.8);
+  show($('logo'),t>=11.9);$('logo').style.opacity=eo(P(t,11.9,12.4));show($('fine'),t>=12.3);$('fine').style.opacity=P(t,12.3,12.7);
+  // screen light spill
+  if(t>=3.85&&t<11.6&&!MAC){glow=Math.max(glow,.75*P(t,3.85,4.2));gcol='#fff1df';}
+  if(MAC){glow=.6;gcol='#e6c9a8';}
+  if(END)glow=.08*P(t,11.9,12.4);
+  document.body.style.setProperty('--g',gcol);$('kglow').style.opacity=glow*.55;$('wallglow').style.opacity=glow*.35;
+  $('cap').style.opacity=1;
+  $('fade').style.opacity=P(t,14.1,14.5);
+  grain(t);
+}
+window.render=render;window.setScreen=setScreen;
+</script></body></html>

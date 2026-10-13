@@ -19,3 +19,8 @@ brag-output-*/real/*.png
 brag-output-*/real/*.wav
 brag-output-*/real/render.log
 brag-output-*/real/__pycache__/
+brag-output-*/apple/assets/
+brag-output-*/apple/frames/
+brag-output-*/apple/*.png
+brag-output-*/apple/*.wav
+brag-output-*/apple/render.log
