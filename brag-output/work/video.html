@@ -1,0 +1,274 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--navy:#0E1A2B;--navy2:#16263D;--orange:#FF6A2B;--mint:#22C993;--paper:#F6F3EE;--ink:#14202F;--muted:#8A97A8;--line:#E3DED6}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy);font-family:Inter,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+#bg{inset:0;position:absolute;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.55}
+#b1{width:900px;height:900px;background:#1D3A5F}
+#b2{width:700px;height:700px;background:#3A2340}
+.disp{font-family:"Inter Display",Inter,sans-serif}
+/* scene 1 */
+#drop{left:948px;width:24px;height:34px;background:var(--orange);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;clip-path:polygon(50% 0,100% 62%,92% 85%,70% 100%,30% 100%,8% 85%,0 62%)}
+#ring{left:960px;top:452px;width:10px;height:10px;border:4px solid var(--orange);border-radius:50%;transform:translate(-50%,-50%)}
+#h1{left:0;right:0;top:400px;text-align:center;font-size:170px;font-weight:800;letter-spacing:-5px;line-height:1}
+#h1 span{display:inline-block}
+#h2{left:0;right:0;top:620px;text-align:center;font-size:76px;font-weight:600;color:var(--muted);letter-spacing:-1px}
+.acc{color:var(--orange)}
+/* scene 2 */
+.mark{width:170px;height:170px;border-radius:44px;background:var(--orange);display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px rgba(255,106,43,.35)}
+#logo{left:875px;top:250px}
+#word{left:0;right:0;top:450px;text-align:center;font-size:150px;font-weight:800;letter-spacing:-5px}
+#tag{left:0;right:0;top:660px;text-align:center;font-size:56px;font-weight:600;color:#C9D2DE;letter-spacing:-.5px}
+/* captions */
+.cap{left:150px;top:390px;width:560px}
+.cap .n{font-size:30px;font-weight:700;color:var(--orange);letter-spacing:4px;margin-bottom:18px}
+.cap .t{font-size:92px;font-weight:800;letter-spacing:-3px;line-height:1.02}
+/* window */
+#win{left:800px;top:120px;width:980px;height:840px;background:var(--paper);border-radius:28px;box-shadow:0 50px 120px rgba(0,0,0,.45);overflow:hidden;color:var(--ink)}
+#bar{height:64px;background:#ECE7DF;display:flex;align-items:center;padding:0 26px;gap:10px}
+#bar i{width:14px;height:14px;border-radius:50%;background:#D3CCC1;display:block}
+#url{margin-left:24px;flex:1;height:36px;background:#fff;border-radius:18px;display:flex;align-items:center;padding:0 20px;font-size:19px;color:#6B7684;font-weight:500}
+.pane{position:absolute;left:0;right:0;top:64px;bottom:0;padding:48px 56px}
+.ptitle{font-size:44px;font-weight:800;letter-spacing:-1px;margin-bottom:30px}
+.lbl{font-size:18px;font-weight:700;color:#7C8796;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.chips{display:flex;gap:14px;margin-bottom:34px}
+.chip{padding:14px 26px;border-radius:30px;border:2px solid var(--line);font-size:24px;font-weight:600;background:#fff}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.field{background:#fff;border:2px solid var(--line);border-radius:18px;padding:22px 26px;font-size:28px;font-weight:500;margin-bottom:30px;min-height:76px}
+.row2{display:flex;gap:22px}
+.row2 .field{flex:1}
+.caret{display:inline-block;width:3px;height:30px;background:var(--orange);vertical-align:-5px;margin-left:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;font-weight:700;font-size:28px;border-radius:18px;height:80px;width:100%}
+#toast{left:50%;bottom:44px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:20px 32px;border-radius:40px;font-size:24px;font-weight:600;white-space:nowrap;display:flex;gap:12px;align-items:center}
+.ok{color:var(--mint)}
+/* offers */
+.offer{background:#fff;border:2px solid var(--line);border-radius:22px;padding:26px 30px;margin-bottom:22px;display:flex;align-items:center;gap:24px}
+.av{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#fff;flex:none}
+.oinfo{flex:1}
+.oname{font-size:28px;font-weight:700;display:flex;align-items:center;gap:10px}
+.ver{font-size:16px;font-weight:700;color:#0E8A62;background:#DDF6EC;padding:5px 11px;border-radius:12px}
+.omsg{font-size:22px;color:#6B7684;margin-top:6px}
+.price{font-size:40px;font-weight:800;letter-spacing:-1px;margin-right:6px}
+.acc-btn{width:150px;height:60px;border-radius:14px;background:var(--ink);color:#fff;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* booking */
+.bk{background:#fff;border:2px solid var(--line);border-radius:22px;padding:30px 34px;margin-bottom:34px}
+.steps{display:flex;justify-content:space-between;position:relative;margin-top:30px}
+.track{position:absolute;left:32px;right:32px;top:30px;height:6px;background:var(--line);border-radius:3px}
+#fill{position:absolute;left:0;top:0;bottom:0;background:var(--mint);border-radius:3px}
+.step{width:180px;text-align:center;position:relative;z-index:1}
+.dot{width:66px;height:66px;border-radius:50%;background:#fff;border:5px solid var(--line);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:#fff}
+.step span{font-size:21px;font-weight:700;color:#6B7684}
+.stars{display:flex;gap:16px;margin-top:8px}
+.star{width:70px;height:70px}
+#posted{font-size:26px;font-weight:700;margin-top:22px}
+/* cursor */
+#cur{width:46px;height:46px;z-index:50;left:0;top:0}
+#clk{width:60px;height:60px;border-radius:50%;border:4px solid var(--orange);z-index:49;transform:translate(-50%,-50%)}
+/* outro */
+#o1{left:0;right:0;top:340px;text-align:center;font-size:110px;font-weight:800;letter-spacing:-4px;line-height:1.05}
+#o2{left:0;right:0;top:660px;text-align:center;font-size:40px;font-weight:600;color:#C9D2DE}
+#o3{left:0;right:0;top:860px;text-align:center;font-size:26px;font-weight:500;color:var(--muted)}
+#ologo{left:0;right:0;top:210px;display:flex;justify-content:center;align-items:center;gap:22px;font-size:52px;font-weight:800;letter-spacing:-1.5px}
+#ologo .mark{width:84px;height:84px;border-radius:22px;box-shadow:none}
+#fade{inset:0;position:absolute;background:var(--navy);z-index:100}
+</style></head><body>
+<div id="bg"><div class="blob" id="b1"></div><div class="blob" id="b2"></div></div>
+
+<!-- scene 1 -->
+<div id="drop" class="abs"></div>
+<div id="ring" class="abs"></div>
+<div id="h1" class="abs disp"><span id="w1">Something</span>&nbsp;<span id="w2" class="acc">broke.</span></div>
+<div id="h2" class="abs">Who do you call?</div>
+
+<!-- scene 2 -->
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="lf" viewBox="0 0 100 100"><path d="M50 12c-15.5 0-28 12.3-28 27.6C22 60 50 88 50 88s28-28 28-48.4C78 24.3 65.5 12 50 12z" fill="#fff"/><path d="M41 44.5l7 7 13-14" stroke="#FF6A2B" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="st" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+</defs></svg>
+<div id="logo" class="abs mark"><svg width="120" height="120"><use href="#lf"/></svg></div>
+<div id="word" class="abs disp">LocalFix</div>
+<div id="tag" class="abs">Find trusted local pros. Compare offers. Book.</div>
+
+<!-- captions -->
+<div id="c1" class="abs cap"><div class="n">STEP 1</div><div class="t disp">Post what you need</div></div>
+<div id="c2" class="abs cap"><div class="n">STEP 2</div><div class="t disp">Compare offers</div></div>
+<div id="c3" class="abs cap"><div class="n">STEP 3</div><div class="t disp">Book, track, review</div></div>
+
+<!-- window -->
+<div id="win" class="abs">
+  <div id="bar"><i></i><i></i><i></i><div id="url">localfix.app/<span id="path">requests/new</span></div></div>
+
+  <div id="p1" class="pane">
+    <div class="ptitle">What needs fixing?</div>
+    <div class="lbl">Category</div>
+    <div class="chips"><div class="chip" id="chipP">Plumbing</div><div class="chip">Electrical</div><div class="chip">Cleaning</div><div class="chip">Painting</div></div>
+    <div class="lbl">Describe the job</div>
+    <div class="field" id="desc"></div>
+    <div class="row2">
+      <div><div class="lbl">Location</div><div class="field" id="loc" style="width:420px"></div></div>
+      <div style="flex:1"><div class="lbl">Preferred time</div><div class="field" id="when"></div></div>
+    </div>
+    <div class="btn" id="post">Post request</div>
+    <div id="toast" class="abs"><span class="ok">✓</span> Request posted · providers notified</div>
+  </div>
+
+  <div id="p2" class="pane">
+    <div class="ptitle">3 offers for “Kitchen sink is leaking”</div>
+    <div class="offer" id="of1"><div class="av" style="background:#3B6FB6">KP</div><div class="oinfo"><div class="oname">Karim's Plumbing <span class="ver">✓ Verified</span></div><div class="omsg">“I can be there at 9am. Parts included.”</div></div><div class="price">$45</div><div class="acc-btn" id="ab1">Accept</div></div>
+    <div class="offer" id="of2"><div class="av" style="background:#8A5BB0">NH</div><div class="oinfo"><div class="oname">Nadia Haddad <span class="ver">✓ Verified</span></div><div class="omsg">“Free tomorrow morning.”</div></div><div class="price">$40</div><div class="acc-btn">Accept</div></div>
+    <div class="offer" id="of3"><div class="av" style="background:#C2853A">FS</div><div class="oinfo"><div class="oname">FlowRight Services</div><div class="omsg">“Available after 11am.”</div></div><div class="price">$35</div><div class="acc-btn">Accept</div></div>
+  </div>
+
+  <div id="p3" class="pane">
+    <div class="ptitle">Booking with Karim's Plumbing</div>
+    <div class="bk">
+      <div class="lbl">Status</div>
+      <div class="steps">
+        <div class="track"><div id="fill"></div></div>
+        <div class="step"><div class="dot" id="d0">✓</div><span>Booked</span></div>
+        <div class="step"><div class="dot" id="d1">✓</div><span>In progress</span></div>
+        <div class="step"><div class="dot" id="d2">✓</div><span>Completed</span></div>
+        <div class="step"><div class="dot" id="d3">✓</div><span>Payment recorded</span></div>
+      </div>
+    </div>
+    <div id="rate">
+      <div class="lbl">Rate the job</div>
+      <div class="stars"><svg class="star" id="s0"><use href="#st"/></svg><svg class="star" id="s1"><use href="#st"/></svg><svg class="star" id="s2"><use href="#st"/></svg><svg class="star" id="s3"><use href="#st"/></svg><svg class="star" id="s4"><use href="#st"/></svg></div>
+      <div id="posted"><span class="ok">✓</span> Review posted. It helps the next customer choose.</div>
+    </div>
+  </div>
+</div>
+
+<div id="clk" class="abs"></div>
+<svg id="cur" class="abs" viewBox="0 0 24 24"><path d="M4 2.5l15 9.2-6.6 1.5 3.9 7.3-3 1.6-3.9-7.3L4.6 19z" fill="#14202F" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+
+<!-- outro -->
+<div id="ologo" class="abs"><div class="mark"><svg width="60" height="60"><use href="#lf"/></svg></div>LocalFix</div>
+<div id="o1" class="abs disp">From “something broke”<br>to <span class="acc">fixed.</span></div>
+<div id="o2" class="abs">Search · Request · Compare offers · Book · Review</div>
+<div id="o3" class="abs">Charbel Riachy · Georgio Hayek · Steven Bechelany &nbsp;—&nbsp; HTML/CSS/JS · Spring Boot · MySQL</div>
+<div id="fade"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3);
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+// generic in/out: slides up in, fades/lifts out
+function io(el,t,tin,tout,{d=0.45,dy=40,dout=0.28,scale=false}={}){
+  const a=eo(P(t,tin,tin+d)), b=eio(P(t,tout,tout+dout));
+  const o=a*(1-b);
+  el.style.opacity=o;
+  el.style.visibility=o<=0.001?'hidden':'visible';
+  const y=(1-a)*dy - b*dy*0.6;
+  el.style.transform=(el.dataset.base||'')+` translateY(${y}px)`+(scale?` scale(${lerp(.92,1,a)})`:'');
+}
+function typeTxt(el,full,t,a,b,caret=true){
+  const n=Math.round(full.length*P(t,a,b));
+  const showCaret=caret&&t>=a-0.3&&t<b+0.5&&(Math.floor(t*2.5)%2===0||t<b);
+  el.innerHTML=full.slice(0,n)+(showCaret?'<span class="caret"></span>':'');
+}
+// cursor keyframes [t,x,y]
+const CK=[[6.0,1500,1000],[6.45,935,384],[6.9,937,384],[7.6,1080,530],[8.3,1120,600],[8.75,1290,778],[9.6,1300,800],
+          [11.3,1460,900],[12.05,1617,384],[12.6,1622,390],[13.3,1600,560],[15.3,1600,700],[15.75,891,666],[15.8,891,666],[16.25,1235,666],[17.0,1290,820]];
+const CLICKS=[6.9,8.85,12.25,15.8,15.9,16.0,16.1,16.25];
+function cursor(t){
+  let x=CK[0][1],y=CK[0][2];
+  for(let i=0;i<CK.length-1;i++){const[a,x1,y1]=CK[i],[b,x2,y2]=CK[i+1];
+    if(t>=a&&t<=b){const k=eio(P(t,a,b));x=lerp(x1,x2,k);y=lerp(y1,y2,k);break}
+    if(t>b){x=x2;y=y2}}
+  const vis=eo(P(t,6.0,6.3))*(1-P(t,17.0,17.3));
+  let s=1,ring=0,rs=0;
+  for(const c of CLICKS){const k=t-c;if(k>=-0.08&&k<0.12)s=0.85;if(k>=0&&k<0.4){ring=1-k/0.4;rs=k/0.4}}
+  const cu=$('cur');cu.style.opacity=vis;cu.style.transform=`translate(${x-8}px,${y-4}px) scale(${s})`;
+  const ck=$('clk');ck.style.opacity=ring*vis*0.9;ck.style.left=x+'px';ck.style.top=y+'px';ck.style.transform=`translate(-50%,-50%) scale(${0.4+rs*0.9})`;
+}
+
+function render(t){
+  // background drift
+  $('b1').style.transform=`translate(${-200+Math.sin(t*0.35)*120}px,${-300+Math.cos(t*0.27)*90}px)`;
+  $('b2').style.transform=`translate(${1300+Math.cos(t*0.3)*140}px,${560+Math.sin(t*0.4)*100}px)`;
+
+  // S1 hook
+  const dp=P(t,0.15,0.72), dropY=lerp(-60,400,dp*dp);
+  $('drop').style.top=dropY+'px';$('drop').style.opacity=(t<0.72&&t>0.1)?1:0;
+  const rp=P(t,0.72,1.4);$('ring').style.opacity=(t>=0.72&&t<1.4)?(1-rp):0;
+  $('ring').style.width=$('ring').style.height=(10+rp*700)+'px';$('ring').style.borderWidth=(6-rp*5)+'px';
+  const s1out=2.55;
+  io($('h1'),t,0.72,s1out,{d:0.35,dy:0});
+  const w1=back(P(t,0.72,1.05)),w2=back(P(t,0.86,1.2));
+  $('w1').style.transform=`scale(${lerp(0.6,1,w1)})`;$('w2').style.transform=`scale(${lerp(0.6,1,w2)}) rotate(${(1-P(t,0.86,1.4))*-6}deg)`;
+  $('w2').style.opacity=P(t,0.86,0.95);
+  io($('h2'),t,1.35,s1out,{dy:30});
+
+  // S2 reveal
+  $('logo').dataset.base='';
+  const lg=back(P(t,2.85,3.3)), lgo=eio(P(t,5.6,5.85));
+  $('logo').style.opacity=P(t,2.85,3.0)*(1-lgo);$('logo').style.transform=`scale(${lerp(0.3,1,lg)*(1-lgo*0.1)}) rotate(${(1-lg)*-20}deg)`;
+  io($('word'),t,3.0,5.62,{dy:50});
+  io($('tag'),t,3.3,5.65,{dy:30});
+
+  // captions
+  io($('c1'),t,6.05,9.65,{dy:50});
+  io($('c2'),t,9.85,13.5,{dy:50});
+  io($('c3'),t,13.7,17.4,{dy:50});
+
+  // window
+  const wi=eo(P(t,5.85,6.45)), wo=eio(P(t,17.35,17.75));
+  $('win').style.opacity=cl(P(t,5.85,6.15))*(1-wo);
+  $('win').style.transform=`translateX(${(1-wi)*260 + wo*120}px) scale(${lerp(.94,1,wi)})`;
+  $('path').textContent=t<9.75?'requests/new':(t<13.6?'requests/1042/offers':'bookings/1042');
+
+  // pane 1
+  io($('p1'),t,6.1,9.7,{dy:20,d:0.35});
+  $('chipP').className='chip'+(t>=6.9?' on':'');
+  typeTxt($('desc'),'Kitchen sink is leaking under the cabinet',t,7.05,8.05,t<8.1);
+  $('loc').innerHTML=t>=8.15?'📍 Current location':'<span style="color:#B3ADA3">Add location</span>';
+  $('loc').style.opacity=1;
+  $('when').innerHTML=t>=8.35?'Tomorrow · 9–12 AM':'<span style="color:#B3ADA3">Pick a time</span>';
+  const pb=t>=8.8&&t<8.95?0.97:1;$('post').style.transform=`scale(${pb})`;
+  const ta=back(P(t,8.95,9.3));$('toast').style.opacity=P(t,8.95,9.05);$('toast').style.transform=`translateX(-50%) translateY(${(1-ta)*40}px)`;
+
+  // pane 2
+  io($('p2'),t,9.8,13.55,{dy:20,d:0.3});
+  [['of1',10.05],['of2',10.4],['of3',10.75]].forEach(([id,a])=>{const k=back(P(t,a,a+0.4));const el=$(id);
+    el.style.opacity=P(t,a,a+0.15);el.style.transform=`translateX(${(1-k)*80}px)`;});
+  const accd=t>=12.25;
+  $('of1').style.borderColor=accd?'#22C993':'';$('of1').style.boxShadow=accd?'0 14px 40px rgba(34,201,147,.22)':'';
+  $('ab1').style.background=accd?'#22C993':'';$('ab1').textContent=accd?'Accepted ✓':'Accept';
+  const dim=accd?lerp(1,0.35,P(t,12.3,12.6)):1;
+  if(t>=10.9){$('of2').style.opacity=dim;$('of3').style.opacity=dim;}
+  if(t>=12.25&&t<12.4)$('ab1').style.transform='scale(.94)';else $('ab1').style.transform='';
+
+  // pane 3
+  io($('p3'),t,13.65,17.45,{dy:20,d:0.3});
+  const ST=[13.95,14.45,14.95,15.45];
+  ST.forEach((a,i)=>{const on=t>=a;const d=$('d'+i);const k=back(P(t,a,a+0.3));
+    d.style.background=on?'#22C993':'#fff';d.style.borderColor=on?'#22C993':'';d.style.color=on?'#fff':'transparent';
+    d.style.transform=`scale(${on?lerp(0.7,1,k):1})`;});
+  let f=0;for(let i=0;i<3;i++)f+=eio(P(t,ST[i],ST[i+1]))/3;
+  $('fill').style.width=(f*100)+'%';
+  io($('rate'),t,15.6,99,{dy:20,d:0.3});
+  for(let i=0;i<5;i++){const a=[15.8,15.9,16.0,16.1,16.25][i];const on=t>=a;const k=back(P(t,a,a+0.25));
+    const s=$('s'+i);s.style.fill=on?'#FFB020':'#E3DED6';s.style.transform=`scale(${on?lerp(1.35,1,k):1})`;}
+  const pk=eo(P(t,16.45,16.75));$('posted').style.opacity=pk;$('posted').style.transform=`translateY(${(1-pk)*14}px)`;
+
+  cursor(t);
+
+  // outro
+  io($('ologo'),t,17.8,99,{dy:30});
+  io($('o1'),t,18.0,99,{dy:50});
+  io($('o2'),t,18.6,99,{dy:24});
+  io($('o3'),t,19.0,99,{dy:16});
+  $('fade').style.opacity=P(t,20.65,21.0);
+}
+window.render=render;
+render(0);
+</script>
+</body></html>

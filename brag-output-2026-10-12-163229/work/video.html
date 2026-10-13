@@ -1,0 +1,366 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:Inter,"Noto Color Emoji",sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:#F1E3CF}
+svg.main{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.ov{position:absolute;pointer-events:none}
+.disp{font-family:"Inter Display",Inter,sans-serif}
+.cap{left:70px;right:70px;text-align:center;color:#fff;font-weight:900;letter-spacing:-3px;line-height:1.02;background:rgba(24,14,8,.88);border-radius:36px;padding:34px 30px}
+.bubble{background:#fff;color:#2A1A10;border-radius:44px;padding:28px 40px;font-size:54px;font-weight:800;letter-spacing:-1px;box-shadow:0 14px 40px rgba(60,30,10,.18);white-space:nowrap}
+.bubble:after{content:"";position:absolute;bottom:-26px;width:0;height:0;border:16px solid transparent;border-top:28px solid #fff}
+.bubble.l:after{left:70px}.bubble.r:after{right:70px}
+.ono{font-weight:900;font-size:76px;color:#fff;-webkit-text-stroke:3px #2A1A10;paint-order:stroke fill;letter-spacing:-1px}
+#bump{left:180px;top:930px;font-size:200px;font-weight:900;color:#FFD23F;-webkit-text-stroke:10px #2A1A10;paint-order:stroke fill;letter-spacing:-4px}
+#rew{left:0;right:0;top:820px;text-align:center;color:#fff;font-size:92px;font-weight:900;letter-spacing:-2px;text-shadow:4px 0 0 rgba(255,0,80,.7),-4px 0 0 rgba(0,200,255,.7)}
+#scan{inset:0;position:absolute;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 3px,transparent 3px 8px)}
+#frameBorder{inset:0;position:absolute;border:22px solid #fff;box-shadow:inset 0 0 0 4px rgba(0,0,0,.08)}
+.callout{left:50px;width:480px;color:#fff}
+.callout .h{font-size:52px;font-weight:900;letter-spacing:1px;color:#FFD9A8}
+.callout .d{font-size:40px;font-weight:600;line-height:1.2;margin-top:4px;color:#F4ECE2}
+#fTitle{left:50px;right:50px;top:150px;color:#fff}
+#fTitle .a{font-size:150px;font-weight:900;letter-spacing:-6px;line-height:1}
+#fTitle .b{font-size:44px;font-weight:600;color:#FFD9A8;margin-top:14px}
+#endT{left:0;right:0;top:250px;text-align:center;color:#2A1A10}
+#endT .a{font-size:150px;font-weight:900;letter-spacing:-6px}
+#endT .b{font-size:64px;font-weight:700;color:#7A4B2E;margin-top:10px}
+#fade{position:absolute;inset:0;background:#000}
+#flash{position:absolute;inset:0;background:#fff}
+</style></head><body>
+<div id="stage">
+<svg class="main" viewBox="0 0 1080 1920" id="svg">
+<defs>
+  <filter id="desat" color-interpolation-filters="sRGB"><feColorMatrix id="desatM" type="saturate" values="1"/></filter>
+  <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE3F2"/><stop offset="1" stop-color="#EAF6F2"/></linearGradient>
+  <radialGradient id="glow"><stop offset="0" stop-color="#FFE3A3" stop-opacity=".9"/><stop offset="1" stop-color="#FFE3A3" stop-opacity="0"/></radialGradient>
+  <radialGradient id="bokeh"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".8"/><stop offset="1" stop-color="#FFE6B8" stop-opacity="0"/></radialGradient>
+  <linearGradient id="closeBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2418"/><stop offset="1" stop-color="#6B4430"/></linearGradient>
+  <linearGradient id="endBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6EADB"/><stop offset="1" stop-color="#E4C9A6"/></linearGradient>
+</defs>
+
+<!-- CAFE WORLD -->
+<g id="cam">
+ <g id="world" filter="url(#desat)">
+  <rect width="1080" height="1920" fill="#F1E3CF"/>
+  <!-- window -->
+  <rect x="50" y="300" width="360" height="620" rx="18" fill="#6E4A33"/>
+  <rect x="72" y="322" width="316" height="576" rx="8" fill="url(#win)"/>
+  <rect x="226" y="322" width="8" height="576" fill="#6E4A33"/><rect x="72" y="600" width="316" height="8" fill="#6E4A33"/>
+  <path d="M90 880 q40 -90 120 -60 q60 -80 150 -20 v80z" fill="#9CCFB0" opacity=".7"/>
+  <!-- menu board -->
+  <rect x="540" y="250" width="480" height="440" rx="20" fill="#5E3B26"/>
+  <rect x="558" y="268" width="444" height="404" rx="10" fill="#2F5D50"/>
+  <text x="780" y="340" text-anchor="middle" font-family="Inter" font-weight="900" font-size="46" fill="#F6EFE4" letter-spacing="4">MENU</text>
+  <g font-family="Inter" font-weight="700" font-size="32" fill="#E9F1EC">
+   <text x="590" y="420">Espresso</text><text x="590" y="480">Cappuccino</text><text x="590" y="540" fill="#FFD9A8">Iced Latte ★</text><text x="590" y="600">Cold Brew</text>
+  </g>
+  <g stroke="#E9F1EC" stroke-width="3" stroke-dasharray="4 10" opacity=".5"><line x1="800" y1="410" x2="960" y2="410"/><line x1="800" y1="470" x2="960" y2="470"/><line x1="820" y1="530" x2="960" y2="530"/><line x1="800" y1="590" x2="960" y2="590"/></g>
+  <!-- lamps -->
+  <g><line x1="300" y1="0" x2="300" y2="150" stroke="#3A2A20" stroke-width="4"/><path d="M240 150 h120 l30 70 h-180z" fill="#2F5D50"/><circle cx="300" cy="240" r="140" fill="url(#glow)"/></g>
+  <g><line x1="780" y1="0" x2="780" y2="110" stroke="#3A2A20" stroke-width="4"/><path d="M720 110 h120 l30 70 h-180z" fill="#2F5D50"/><circle cx="780" cy="200" r="120" fill="url(#glow)"/></g>
+  <!-- wainscot + floor -->
+  <rect x="0" y="1180" width="1080" height="480" fill="#E2CDB0"/>
+  <g stroke="#D3BB9A" stroke-width="4">
+   <line x1="90" y1="1180" x2="90" y2="1660"/><line x1="180" y1="1180" x2="180" y2="1660"/><line x1="270" y1="1180" x2="270" y2="1660"/><line x1="360" y1="1180" x2="360" y2="1660"/>
+  </g>
+  <rect x="0" y="1660" width="1080" height="260" fill="#B98B63"/>
+  <g stroke="#A97C56" stroke-width="4"><line x1="0" y1="1740" x2="1080" y2="1740"/><line x1="0" y1="1840" x2="1080" y2="1840"/><line x1="200" y1="1660" x2="160" y2="1920"/><line x1="520" y1="1660" x2="520" y2="1920"/><line x1="840" y1="1660" x2="880" y2="1920"/></g>
+  <!-- barista (behind counter) -->
+  <g id="barista"></g>
+  <!-- counter -->
+  <rect x="440" y="1200" width="660" height="44" rx="10" fill="#5E3B26"/>
+  <rect x="460" y="1244" width="640" height="440" fill="#7A4B2E"/>
+  <g stroke="#6A3F25" stroke-width="5"><line x1="460" y1="1330" x2="1100" y2="1330"/><line x1="460" y1="1430" x2="1100" y2="1430"/><line x1="460" y1="1530" x2="1100" y2="1530"/></g>
+  <!-- espresso machine -->
+  <rect x="880" y="1000" width="180" height="200" rx="16" fill="#C9CFD6"/><rect x="900" y="1020" width="140" height="60" rx="8" fill="#9AA3AE"/><rect x="940" y="1100" width="20" height="50" fill="#5B636D"/><rect x="990" y="1100" width="20" height="50" fill="#5B636D"/>
+  <!-- cups on counter -->
+  <rect x="610" y="1150" width="56" height="50" rx="8" fill="#F6EFE4"/><rect x="680" y="1160" width="46" height="40" rx="8" fill="#2F5D50"/>
+  <!-- plant -->
+  <g><path d="M60 1660 l20 -150 h120 l20 150z" fill="#C46A3E"/><path d="M140 1510 C80 1400 40 1360 30 1290 C90 1330 120 1400 140 1510 C150 1390 190 1330 240 1280 C240 1360 190 1440 140 1510z" fill="#3E7A55"/><path d="M140 1510 C120 1420 130 1330 150 1250 C180 1330 170 1430 140 1510z" fill="#4F9168"/></g>
+  <g id="sam"></g>
+  <g id="rusher"></g>
+  <rect id="dim" width="1080" height="1920" fill="#120a06" opacity="0"/>
+ </g>
+ <g id="flyWrap"><g id="fly"></g></g>
+</g>
+
+<!-- CLOSE-UP -->
+<g id="close">
+  <rect width="1080" height="1920" fill="url(#closeBg)"/>
+  <circle cx="160" cy="300" r="160" fill="url(#bokeh)"/><circle cx="900" cy="220" r="120" fill="url(#bokeh)"/><circle cx="760" cy="620" r="90" fill="url(#bokeh)" opacity=".6"/><circle cx="120" cy="900" r="110" fill="url(#bokeh)" opacity=".5"/><circle cx="980" cy="980" r="140" fill="url(#bokeh)" opacity=".5"/>
+  <rect x="0" y="1480" width="1080" height="440" fill="#4A2E1F"/><rect x="0" y="1480" width="1080" height="14" fill="#5E3B26"/>
+  <!-- pitcher -->
+  <g id="pitcher"><path d="M-70 -120 h140 l-12 200 h-116z" fill="#D9DEE4"/><path d="M-70 -120 l-50 -20 l30 40z" fill="#C3C9D0"/><path d="M70 -80 q60 10 40 90 q-10 30 -40 20" stroke="#C3C9D0" stroke-width="18" fill="none"/></g>
+  <rect id="milkStream" x="0" y="0" width="34" height="0" rx="17" fill="#F3E8D8"/>
+  <!-- shot glass -->
+  <g id="shot"><path d="M-45 -70 h90 l-10 140 h-70z" fill="rgba(255,255,255,.35)" stroke="rgba(255,255,255,.8)" stroke-width="4"/><path d="M-40 -30 h80 l-8 96 h-64z" fill="#4A2814"/><path d="M-40 -30 h80 v12 h-80z" fill="#B87A44"/></g>
+  <rect id="espStream" x="0" y="0" width="18" height="0" rx="9" fill="#5A321B"/>
+  <g id="bigCupW" transform="translate(540 1490) scale(2.4)"><g id="big"></g></g>
+</g>
+
+<!-- END -->
+<g id="end">
+  <rect width="1080" height="1920" fill="url(#endBg)"/>
+  <circle cx="540" cy="1150" r="520" fill="#FFF6E8" opacity=".7"/>
+  <ellipse cx="540" cy="1590" rx="260" ry="40" fill="#C9A47D" opacity=".5"/>
+  <g id="heroW"><g id="hero"></g></g>
+</g>
+</svg>
+
+<!-- freeze overlay lines -->
+<svg class="main" viewBox="0 0 1080 1920" id="lines" style="pointer-events:none"></svg>
+
+<div class="ov cap disp" id="cap1" style="top:1420px;font-size:100px">Yep.<br>That's my iced latte.</div>
+<svg class="ov" id="arrow" width="400" height="560" style="left:600px;top:660px" viewBox="0 0 400 560"><path d="M200 540 C 300 400 300 200 120 60" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M120 150 L110 52 L205 70" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div id="frameBorder" class="ov"></div>
+<div id="scan" class="ov"></div>
+<div id="rew" class="ov disp">◀◀ 2 MINUTES<br>EARLIER</div>
+
+<div class="ov bubble l" id="bSam" style="left:240px;top:840px">One iced latte, please.</div>
+<div class="ov bubble r" id="bBar" style="left:440px;top:640px">Coming right up!</div>
+<div class="ov bubble l" id="bRush" style="left:60px;top:860px">sorry!!</div>
+<div class="ov ono" id="o1" style="left:110px;top:1000px">clink!</div>
+<div class="ov ono" id="o2" style="left:770px;top:900px">clink!</div>
+<div class="ov ono" id="o3" style="left:160px;top:760px">clink!</div>
+<div class="ov ono" id="o4" style="left:120px;top:1150px">glug glug</div>
+<div class="ov ono" id="o5" style="left:700px;top:1150px">drip.</div>
+<div class="ov" id="bump">BUMP!</div>
+
+<div class="ov" id="fTitle"><div class="a disp">ICED<br>LATTE.</div><div class="b">A quick description, while we have a second.</div></div>
+<div class="ov callout" id="k0" style="top:600px"><div class="h">ESPRESSO</div><div class="d">A double shot, pulled hot, poured over the top.</div></div>
+<div class="ov callout" id="k1" style="top:840px"><div class="h">ICE</div><div class="d">Cracked, clinking, non-negotiable.</div></div>
+<div class="ov callout" id="k2" style="top:1040px"><div class="h">THE SWIRL</div><div class="d">Espresso blooming slowly into the milk.</div></div>
+<div class="ov callout" id="k3" style="top:1250px"><div class="h">CONDENSATION</div><div class="d">Proof it's properly cold.</div></div>
+<div class="ov callout" id="k4" style="top:1450px"><div class="h">COLD MILK</div><div class="d">Creamy, poured first. The base.</div></div>
+
+<div class="ov cap disp" id="cap2" style="top:180px;font-size:110px">Not. A. Single.<br>Drop.</div>
+<div class="ov" id="endT"><div class="a disp">Iced latte.</div><div class="b">Worth protecting.</div></div>
+<div id="flash" class="ov"></div>
+<div id="fade" class="ov"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), ei=x=>x*x*x;
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const DUR=23.2;
+
+// ---------- builders ----------
+function person(id,c){
+  const arm=(n,col)=>`<g id="${id}_${n}"><line x1="0" y1="0" x2="0" y2="215" stroke="${col}" stroke-width="40" stroke-linecap="round"/><circle cx="0" cy="228" r="26" fill="${c.skin}"/><g id="${id}_${n}_hold"></g></g>`;
+  const leg=(n,col)=>`<g id="${id}_${n}"><line x1="0" y1="0" x2="0" y2="270" stroke="${col}" stroke-width="52" stroke-linecap="round"/><ellipse cx="18" cy="292" rx="44" ry="20" fill="${c.shoe}"/></g>`;
+  return `<g id="${id}_root"><g id="${id}_body">
+   ${leg('legB',c.pants2)}${arm('armB',c.top2)}${leg('legF',c.pants)}
+   <rect x="-74" y="-570" width="148" height="300" rx="62" fill="${c.top}"/>
+   ${c.apron?`<path d="M-58 -500 h116 v210 a20 20 0 0 1 -20 20 h-76 a20 20 0 0 1 -20 -20z" fill="${c.apron}"/>`:''}
+   <g id="${id}_head">
+     <rect x="-22" y="-600" width="44" height="40" fill="${c.skin}"/>
+     <circle cx="0" cy="-668" r="90" fill="${c.skin}"/>
+     <path d="${c.hairPath||'M-92 -672 a92 92 0 0 1 184 -6 q-60 -40 -120 -10 q-30 15 -64 16z'}" fill="${c.hair}"/>
+     <g id="${id}_eyes"><ellipse cx="26" cy="-672" rx="9" ry="12" fill="#2A1A10"/><ellipse cx="62" cy="-672" rx="9" ry="12" fill="#2A1A10"/></g>
+     <circle cx="66" cy="-636" r="14" fill="#F08F7A" opacity=".45"/>
+     <path id="${id}_mouth" d="M30 -628 q16 12 32 0" stroke="#2A1A10" stroke-width="7" fill="none" stroke-linecap="round"/>
+     <path id="${id}_sweat" d="M-40 -760 q14 22 0 34 q-14 -12 0 -34z" fill="#8FD3FF" opacity="0"/>
+   </g>
+   ${arm('armF',c.top)}
+  </g></g>`;
+}
+const ICE=[[-46,-205,18],[28,-172,-12],[-18,-112,30],[44,-248,8]];
+function cup(p,{splash=false}={}){
+  const cubes=ICE.map(([x,y,r],i)=>`<g id="${p}_ice${i}"><rect x="${x-31}" y="${y-31}" width="62" height="62" rx="12" transform="rotate(${r} ${x} ${y})" fill="rgba(236,248,255,.55)" stroke="rgba(255,255,255,.95)" stroke-width="3"/></g>`).join('');
+  const sw=['M-70 -215 C-40 -170 -90 -140 -55 -90','M-10 -220 C20 -175 -30 -140 5 -100 C30 -70 0 -50 10 -30','M55 -215 C80 -170 30 -150 60 -110','M-40 -210 C-20 -190 -50 -160 -25 -140'].map(d=>`<path d="${d}" pathLength="1" stroke="#7A4A2A" stroke-width="16" stroke-linecap="round" fill="none" opacity=".55" class="${p}_sw"/>`).join('');
+  const cond=[[-60,-150,6],[50,-90,5],[-30,-60,4],[70,-200,5],[-75,-240,4],[20,-30,5],[60,-140,3]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*1.3}" fill="#fff" opacity=".75"/>`).join('');
+  const spl=splash?`<g id="${p}_splash">
+     <path d="M-92 -296 C-150 -380 -120 -470 -30 -520 C-60 -470 -50 -410 0 -360 C40 -420 60 -480 120 -500 C110 -430 80 -360 92 -296z" fill="#C99A6E"/>
+     <path d="M-40 -330 C-60 -390 -40 -440 0 -470 C-10 -420 0 -380 20 -340z" fill="#8C5A35" opacity=".7"/>
+     <circle cx="-20" cy="-585" r="16" fill="#C99A6E"/><circle cx="70" cy="-570" r="11" fill="#C99A6E"/><circle cx="150" cy="-470" r="13" fill="#C99A6E"/><circle cx="-140" cy="-500" r="10" fill="#C99A6E"/><circle cx="-170" cy="-420" r="7" fill="#C99A6E"/><circle cx="160" cy="-390" r="8" fill="#C99A6E"/>
+     <rect x="-200" y="-640" width="62" height="62" rx="12" transform="rotate(25 -169 -609)" fill="rgba(236,248,255,.6)" stroke="#fff" stroke-width="3"/>
+     <rect x="120" y="-680" width="56" height="56" rx="12" transform="rotate(-18 148 -652)" fill="rgba(236,248,255,.6)" stroke="#fff" stroke-width="3"/>
+   </g>`:'';
+  return `<g id="${p}">
+   <defs><clipPath id="${p}_clip"><path d="M-100 -300 L100 -300 L76 0 L-76 0 Z"/></clipPath>
+   <linearGradient id="${p}_lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E341C"/><stop offset=".3" stop-color="#9A643D"/><stop offset=".65" stop-color="#D3AB84"/><stop offset="1" stop-color="#F3E8D8"/></linearGradient></defs>
+   ${spl}
+   <g id="${p}_strawW"><g id="${p}_straw"><rect x="18" y="-440" width="24" height="420" rx="12" fill="#2F8F6B" transform="rotate(12 30 -230)"/></g></g>
+   <g clip-path="url(#${p}_clip)">
+     <rect id="${p}_milk" x="-110" width="220" y="0" height="0" fill="#F3E8D8"/>
+     <rect id="${p}_esp" x="-110" width="220" y="0" height="0" fill="url(#${p}_lg)"/>
+     <g id="${p}_swirl">${sw}</g>
+   </g>
+   ${cubes}
+   <path d="M-100 -300 L100 -300 L76 0 L-76 0 Z" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.95)" stroke-width="5" stroke-linejoin="round"/>
+   <path d="M-78 -278 L-60 -30" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".45"/>
+   <g id="${p}_cond">${cond}</g>
+   <ellipse cx="0" cy="-300" rx="100" ry="12" fill="none" stroke="#fff" stroke-width="5" opacity=".95"/>
+  </g>`;
+}
+function cupState(p,{milk=1,esp=1,swirl=1,cond=1,straw=0}={}){
+  const L=milk*225+esp*30;
+  $(p+'_milk').setAttribute('y',-L);$(p+'_milk').setAttribute('height',L);
+  $(p+'_esp').setAttribute('y',-L);$(p+'_esp').setAttribute('height',esp*(36+swirl*170));$(p+'_esp').style.opacity=esp>0?1:0;
+  document.querySelectorAll('.'+p+'_sw').forEach((e,i)=>{const k=cl(swirl*1.3-i*0.1);e.style.strokeDasharray=1;e.style.strokeDashoffset=1-k;});
+  $(p+'_cond').style.opacity=cond;
+  $(p+'_straw').setAttribute('transform',`translate(0 ${straw})`);
+}
+const SAM={skin:'#E8B48A',hair:'#3A2518',top:'#F2B134',top2:'#D89A22',pants:'#3B5A86',pants2:'#304B70',shoe:'#2B2B2B'};
+const BAR={skin:'#A86B48',hair:'#1E1410',top:'#F7F1E8',top2:'#E6DDD0',pants:'#333',pants2:'#2A2A2A',shoe:'#222',apron:'#2F5D50',hairPath:'M-92 -680 a92 92 0 0 1 184 0 q-92 -30 -184 0z'};
+const RUS={skin:'#F1C7A5',hair:'#8A5A2B',top:'#5B6B7E',top2:'#4C5A6B',pants:'#3E4A59',pants2:'#343F4C',shoe:'#1E1E1E',hairPath:'M-92 -668 a92 92 0 0 1 184 -10 q-40 -50 -100 -30 q-50 10 -84 40z'};
+$('sam').innerHTML=person('sam',SAM);$('barista').innerHTML=person('bar',BAR);$('rusher').innerHTML=person('rus',RUS);
+$('sam_armF_hold').innerHTML=`<g id="handCupW">${cup('hc')}</g>`;
+$('rus_armF_hold').innerHTML=`<g id="phone"><rect x="-26" y="-50" width="52" height="92" rx="10" fill="#1E1E1E"/><rect x="-20" y="-42" width="40" height="72" rx="6" fill="#6FB6FF"/></g>`;
+$('fly').innerHTML=cup('fc',{splash:true});
+$('big').innerHTML=cup('bc');
+$('hero').innerHTML=cup('ec');
+cupState('hc');cupState('fc');cupState('ec');
+
+function pose(id,{x=0,y=1800,s=1,flip=1,lean=0,legF=0,legB=0,armF=0,armB=0,mouth='smile',eyes=1,sweat=0,head=0}={}){
+  $(id+'_root').setAttribute('transform',`translate(${x} ${y}) scale(${s*flip} ${s})`);
+  $(id+'_body').setAttribute('transform',`rotate(${lean} 0 -300)`);
+  $(id+'_legF').setAttribute('transform',`translate(10 -300) rotate(${legF})`);
+  $(id+'_legB').setAttribute('transform',`translate(-10 -300) rotate(${legB})`);
+  $(id+'_armF').setAttribute('transform',`translate(20 -520) rotate(${armF})`);
+  $(id+'_armB').setAttribute('transform',`translate(-20 -520) rotate(${armB})`);
+  $(id+'_head').setAttribute('transform',`rotate(${head} 0 -600)`);
+  const M={smile:'M30 -628 q16 12 32 0',open:'M30 -630 q16 26 32 0 z',O:'M38 -628 a10 13 0 1 0 0.1 0z',flat:'M30 -626 h32',big:'M24 -632 q22 30 44 0z'};
+  $(id+'_mouth').setAttribute('d',M[mouth]);$(id+'_mouth').setAttribute('fill',(mouth==='smile'||mouth==='flat')?'none':'#2A1A10');
+  $(id+'_eyes').setAttribute('transform',`translate(0 ${-672*(1-eyes)}) scale(1 ${eyes})`);
+  $(id+'_sweat').style.opacity=sweat;
+}
+function walk(ph,amp=26){const s=Math.sin(ph);return {legF:amp*s,legB:-amp*s,armB:amp*0.9*s,bob:-Math.abs(Math.cos(ph))*10};}
+
+// freeze poses
+const SAM_FREEZE={x:430,y:1800,flip:-1,lean:-14,legF:-22,legB:16,armF:-150,armB:-115,mouth:'O',eyes:1.25};
+const RUS_FREEZE={x:250,y:1800,flip:1,lean:-12,legF:18,legB:-28,armF:-165,armB:-140,mouth:'O',eyes:1.25,head:-8};
+const HAND={x:199,y:1432,r:0}, FLY={x:330,y:820,r:28};
+
+function setFly(x,y,r,s=.5,spl=1){
+  $('fly').setAttribute('transform',`translate(${x} ${y}) rotate(${r}) scale(${s})`);
+  $('fc_splash').setAttribute('transform',`translate(0 -300) scale(${spl}) translate(0 300)`);$('fc_splash').style.opacity=spl>0.02?1:0;
+}
+
+// callout leader lines
+const LT=[[470,640,784,1090],[400,880,834,1233],[470,1080,714,1258],[490,1290,910,1314],[420,1490,686,1426]];
+$('lines').innerHTML=LT.map((l,i)=>`<g id="ln${i}"><line id="lnl${i}" x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}" stroke="#FFD9A8" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/><circle id="lnc${i}" cx="${l[2]}" cy="${l[3]}" r="12" fill="none" stroke="#FFD9A8" stroke-width="4"/><circle id="lnd${i}" cx="${l[2]}" cy="${l[3]}" r="5" fill="#FFD9A8"/></g>`).join('');
+
+function show(el,on){el.style.display=on?'':'none';}
+function popIn(el,t,a,b,{d=.3,dy=30}={}){const on=t>=a&&t<b;show(el,on);if(!on)return;const k=P(t,a,a+d);el.style.opacity=cl(k*3);el.style.transform=`translateY(${(1-eo(k))*dy}px) scale(${lerp(.7,1,back(k))})`;}
+function fadeIn(el,t,a,b,{d=.35,dy=30}={}){const on=t>=a&&t<b;show(el,on);if(!on)return;const k=eo(P(t,a,a+d));el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px)`;}
+
+function render(t){
+  const inWorld=t<6.6||(t>=10.0&&t<20.6);
+  show($('cam'),inWorld);show($('close'),t>=6.6&&t<10.0);show($('end'),t>=20.6);
+  // defaults
+  let samP={x:-500},rusP={x:-600},barP={x:760,y:1640,flip:-1,mouth:'smile'};
+  let sat=1,dim=0,camT='',flyOn=false,handCup=false,shake=0;
+  const frozen=(t<2.4)||(t>=11.6&&t<18.0);
+
+  if(t<2.4){ samP=SAM_FREEZE; rusP=RUS_FREEZE; sat=0.35; flyOn=true; setFly(FLY.x,FLY.y,FLY.r); const S=lerp(1.6,1.5,t/2.4); camT=`translate(${540-S*340} ${1060-S*1050}) scale(${S})`; }
+  else if(t<3.3){ // rewind glitch
+    samP=SAM_FREEZE; rusP=RUS_FREEZE; sat=0.2; flyOn=true; setFly(FLY.x,FLY.y,FLY.r); const S=lerp(1.5,1.0,eio(P(t,2.4,3.3))); camT=`translate(${540-S*340+(S-1)*0} ${1060-S*1050}) scale(${S})`;
+  }
+  else if(t<6.6){
+    const k=P(t,3.4,4.6), w=walk((t-3.4)*9);
+    if(t<4.6){samP={x:lerp(-250,520,k),y:1800+w.bob,flip:1,legF:w.legF,legB:w.legB,armF:-w.armB,armB:w.armB};}
+    else{ const talk=t>=4.75&&t<5.6&&Math.floor(t*9)%2===0; samP={x:520,flip:1,mouth:talk?'open':'smile',armF:-4,armB:4}; }
+    const btalk=t>=5.75&&t<6.4&&Math.floor(t*9)%2===0; barP={x:760,y:1640,flip:-1,mouth:btalk?'open':'smile',armF:-30,armB:10};
+  }
+  else if(t>=10.0&&t<11.6){
+    handCup=t<11.2;
+    if(t<10.3){samP={x:520,flip:t<10.15?1:-1,armF:-70,armB:4,mouth:'big'};}
+    else if(t<11.2){const w=walk((t-10.3)*7,18);samP={x:lerp(520,430,P(t,10.3,11.2)),y:1800+w.bob,flip:-1,legF:w.legF,legB:w.legB,armF:-70,armB:w.armB,mouth:'big'};}
+    else{const k=eo(P(t,11.2,11.45));samP={...SAM_FREEZE,lean:lerp(0,SAM_FREEZE.lean,k),armF:lerp(-70,-150,k),armB:lerp(0,-115,k)};}
+    if(t<11.2){const w=walk((t-10.4)*12,30);rusP={x:lerp(-300,250,P(t,10.4,11.2)),y:1800+w.bob,flip:1,legF:w.legF,legB:w.legB,armF:-150,armB:w.armB,mouth:'flat',head:12,lean:6};}
+    else{const k=eo(P(t,11.2,11.45));rusP={...RUS_FREEZE,armF:lerp(-150,-165,k)};}
+    if(t>=11.2){flyOn=true;const k=eo(P(t,11.2,11.6));setFly(lerp(HAND.x,FLY.x,k),lerp(HAND.y,FLY.y,k)-Math.sin(k*Math.PI)*60,lerp(0,FLY.r,k),.5,k);}
+    barP={x:760,y:1640,flip:-1,armF:-20,armB:10,mouth:t>11.25?'O':'smile'};
+    if(t>=11.2)shake=Math.exp(-(t-11.2)*10)*30;
+  }
+  else if(t>=11.6&&t<18.0){
+    samP=SAM_FREEZE;rusP=RUS_FREEZE;barP={x:760,y:1640,flip:-1,mouth:'O',armF:-20,armB:10};flyOn=true;
+    const z=eio(P(t,11.6,12.3)); sat=lerp(1,0.15,P(t,11.6,11.9)); dim=lerp(0,0.55,z);
+    const drift=Math.sin((t-11.6)*0.6)*1.5;
+    setFly(FLY.x,FLY.y,FLY.r+drift*0.6);
+    const S=lerp(1,2.8,z),tx=lerp(0,680-2.8*360,z),ty=lerp(0,1230-2.8*750,z);camT=`translate(${tx} ${ty}) scale(${S})`;
+  }
+  else if(t>=18.0&&t<20.6){
+    const z=1-eio(P(t,18.0,18.45)); sat=lerp(0.15,1,P(t,18.0,18.3)); dim=0.55*z;
+    const S=lerp(1,2.8,z),tx=lerp(0,680-2.8*360,z),ty=lerp(0,1230-2.8*750,z);camT=`translate(${tx} ${ty}) scale(${S})`;
+    const c=P(t,18.3,18.9);
+    if(t<18.9){flyOn=true;const k=ei(c);setFly(lerp(FLY.x,HAND.x,k),lerp(FLY.y,HAND.y,k),lerp(FLY.r,0,eo(c)),.5,1-eo(P(t,18.3,18.75)));}
+    handCup=t>=18.9;
+    const r=eo(P(t,18.6,19.0));
+    samP={x:430,flip:-1,lean:lerp(SAM_FREEZE.lean,0,r),legF:lerp(-22,0,r),legB:lerp(16,0,r),armF:lerp(-150,-70,r),armB:lerp(-115,0,r),mouth:t>=19.0?'big':'O',eyes:t>=19.0?1:1.25,sweat:t>=19.0?1-P(t,20.0,20.4):0};
+    if(t<19.2){const r2=eo(P(t,18.2,18.6));rusP={x:250,flip:1,lean:lerp(-12,0,r2),legF:lerp(18,0,r2),legB:lerp(-28,0,r2),armF:lerp(-165,-30,r2),armB:lerp(-140,10,r2),mouth:'open',head:-6};}
+    else{const w=walk((t-19.2)*12,30);rusP={x:lerp(250,1300,P(t,19.2,20.3)),y:1800+w.bob,flip:1,legF:w.legF,legB:w.legB,armF:-150,armB:w.armB,mouth:'flat',head:12,lean:6};}
+    barP={x:760,y:1640,flip:-1,mouth:'smile',armF:-20,armB:10};
+  }
+  if(samP.x>-500)pose('sam',samP);else pose('sam',{x:-500});
+  pose('rus',rusP.x>-600?rusP:{x:-600});
+  pose('bar',barP);
+  $('handCupW').setAttribute('transform','translate(0 75) rotate(70) scale(.5)');
+  $('handCupW').style.display=handCup?'':'none';
+  $('flyWrap').style.display=flyOn?'':'none';
+  $('desatM').setAttribute('values',sat);$('dim').setAttribute('opacity',dim);
+  $('cam').setAttribute('transform',camT);
+  // rewind jitter
+  let jx=0,jy=0;if(t>=2.4&&t<3.3){jx=Math.sin(t*90)*14;jy=Math.cos(t*70)*6;}
+  jx+=Math.sin(t*97)*shake;jy+=Math.cos(t*83)*shake;
+  $('svg').style.transform=`translate(${jx}px,${jy}px)`;
+  $('svg').style.filter=(t>=2.4&&t<3.3)?'contrast(1.3) hue-rotate(-12deg)':'';
+
+  // ----- close-up 6.6-10 -----
+  if(t>=6.6&&t<10.0){
+    const iceT=[6.8,6.98,7.16,7.3];
+    ICE.forEach((c,i)=>{const k=P(t,iceT[i],iceT[i]+0.28);const y=t<iceT[i]?-900:lerp(-700,0,k*k)+(k>=1?-Math.sin(P(t,iceT[i]+0.28,iceT[i]+0.5)*Math.PI)*14:0);
+      $('bc_ice'+i).setAttribute('transform',`translate(0 ${y})`);$('bc_ice'+i).style.opacity=t<iceT[i]?0:1;});
+    const milk=eio(P(t,7.5,8.4)),esp=eo(P(t,8.5,9.2)),swirl=eio(P(t,8.7,9.9));
+    const straw=t<9.4?-900:lerp(-600,0,eo(P(t,9.4,9.65)));
+    cupState('bc',{milk,esp,swirl,cond:P(t,9.2,9.9),straw});$('bc_strawW').style.opacity=t>=9.4?1:0;
+    const L=milk*225+esp*30, surf=1490-2.4*L;
+    // pitcher
+    const pin=eo(P(t,7.3,7.5)),pout=eio(P(t,8.4,8.65)),tilt=lerp(0,-62,eio(P(t,7.35,7.55)))*(1-pout);
+    $('pitcher').setAttribute('transform',`translate(${lerp(-200,250,pin)-pout*400} 420) rotate(${-tilt} 0 0)`);
+    const ms=t>=7.48&&t<8.42;$('milkStream').setAttribute('x',380);$('milkStream').setAttribute('y',470);$('milkStream').setAttribute('height',ms?Math.max(0,surf-470):0);
+    $('milkStream').setAttribute('width',34*(1-P(t,8.3,8.42)));
+    const sin=eo(P(t,8.3,8.5)),sout=eio(P(t,9.2,9.45)),st=lerp(0,70,eio(P(t,8.35,8.55)))*(1-sout);
+    $('shot').setAttribute('transform',`translate(${lerp(1300,700,sin)+sout*500} 420) rotate(${-st})`);
+    const es=t>=8.52&&t<9.22;$('espStream').setAttribute('x',640);$('espStream').setAttribute('y',460);$('espStream').setAttribute('height',es?Math.max(0,surf-460):0);
+    // slow push-in
+    const z=lerp(1,1.06,P(t,6.6,10));$('close').setAttribute('transform',`translate(${540*(1-z)} ${1200*(1-z)}) scale(${z})`);
+  }
+  [['o1',6.84],['o2',7.02],['o3',7.2]].forEach(([id,a])=>popIn($(id),t,a,Math.min(a+0.9,10)));
+  popIn($('o4'),t,7.7,8.5);popIn($('o5'),t,8.75,9.6);
+
+  // ----- end -----
+  if(t>=20.6){cupState('ec');const r=Math.sin((t-20.6)*1.2)*2;const s=lerp(2.0,2.2,eo(P(t,20.6,21.4)));
+    $('heroW').setAttribute('transform',`translate(540 1580) rotate(${r}) scale(${s})`);}
+
+  // overlays
+  fadeIn($('cap1'),t,0.25,2.4);show($('arrow'),t>=0.6&&t<2.4);$('arrow').style.opacity=P(t,0.6,0.8);
+  show($('frameBorder'),t<2.4);
+  show($('scan'),t>=2.4&&t<3.3);show($('rew'),t>=2.4&&t<3.3);
+  popIn($('bSam'),t,4.75,6.1);popIn($('bBar'),t,5.7,6.6);
+  popIn($('bump'),t,11.2,11.95,{d:.15});
+  if(t>=11.2&&t<11.95)$('bump').style.transform+=` rotate(-8deg) scale(${1+Math.exp(-(t-11.2)*8)*.4})`;
+  fadeIn($('fTitle'),t,12.0,18.0);
+  [12.9,13.7,14.5,15.3,16.1].forEach((a,i)=>{fadeIn($('k'+i),t,a,18.0,{dy:20});$('ln'+i).style.display=(t>=a&&t<18.0)?'':'none';$('ln'+i).style.opacity=P(t,a,a+.3);});
+  if(t>=12.9&&t<18){
+    const tg=[[$('fc_esp'),.5,.12],[$('fc_ice1'),.5,.5],[document.querySelectorAll('.fc_sw')[1],.5,.5],[$('fc_cond'),.85,.4],[$('fc_milk'),.5,.8]];
+    tg.forEach(([el,fx,fy],i)=>{const r=el.getBoundingClientRect();const x=r.x+r.width*fx,y=r.y+r.height*fy;
+      $('lnl'+i).setAttribute('x2',x);$('lnl'+i).setAttribute('y2',y);['lnc','lnd'].forEach(p=>{$(p+i).setAttribute('cx',x);$(p+i).setAttribute('cy',y);});});
+  }
+  popIn($('bRush'),t,18.4,19.5);
+  fadeIn($('cap2'),t,19.1,20.6);
+  fadeIn($('endT'),t,20.8,99);$('endT').querySelector('.b').style.opacity=P(t,21.4,21.8);
+  let fl=0;if(t>=11.2)fl=Math.max(fl,.7*Math.exp(-(t-11.2)*12));if(t>=11.6&&t<12)fl=Math.max(fl,.5*Math.exp(-(t-11.6)*10));if(t<0.25)fl=1-t*4;
+  $('flash').style.opacity=fl;
+  $('fade').style.opacity=P(t,22.8,23.2);
+}
+window.render=render;render(0);
+</script>
+</body></html>
